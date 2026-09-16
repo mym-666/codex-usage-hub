@@ -1,0 +1,11 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Security vulnerability
+    url: https://github.com/mym-666/codex-usage-hub/security/advisories/new
+    about: Report a vulnerability privately instead of opening a public issue.
+  - name: Support and documentation
+    url: https://github.com/mym-666/codex-usage-hub/blob/main/SUPPORT.md
+    about: Read the support guide before opening a new issue.
+  - name: Installation and troubleshooting
+    url: https://github.com/mym-666/codex-usage-hub#troubleshooting
+    about: Check the README first - most overlay and balance questions are answered there.

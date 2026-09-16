@@ -1,0 +1,43 @@
+name: Feature request
+description: Suggest a new capability or an improvement to Usage Hub
+title: "[Feature] "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the suggestion. Please describe the user problem first, not only the proposed
+        implementation. Do not include API keys, tokens, cookies or personal usage data.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem to solve
+      description: What are you trying to do, and what makes it difficult today?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: Describe the behaviour or interface you would like.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Existing workarounds, other tools, or smaller changes that could help.
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional context
+      description: Screenshots with personal data redacted, provider details, or related issues.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: I searched existing issues for the same request
+          required: true
+        - label: I did not include secrets, tokens, cookies or personal usage data
+          required: true

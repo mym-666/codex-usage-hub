@@ -1,0 +1,43 @@
+{
+  "manifest_version": 3,
+  "name": "Usage Hub Web Bill Bridge",
+  "version": "1.7.1",
+  "description": "Captures DeepSeek's own usage response and exact token breakdown for Codex Usage Hub.",
+  "permissions": [
+    "alarms",
+    "storage"
+  ],
+  "host_permissions": [
+    "https://platform.deepseek.com/*",
+    "http://127.0.0.1:32146/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://platform.deepseek.com/*"
+      ],
+      "js": [
+        "inject.js"
+      ],
+      "run_at": "document_start",
+      "world": "MAIN"
+    },
+    {
+      "matches": [
+        "https://platform.deepseek.com/*"
+      ],
+      "js": [
+        "parse.js",
+        "content.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "action": {
+    "default_title": "Usage Hub Web Bill",
+    "default_popup": "popup.html"
+  }
+}

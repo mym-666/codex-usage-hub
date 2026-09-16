@@ -1,0 +1,79 @@
+{
+  "id": "generic-openai-compatible",
+  "displayName": "OpenAI-compatible",
+  "fallback": true,
+  "match": {
+    "names": ["*"],
+    "hosts": ["*"],
+    "websiteHosts": ["*"],
+    "categories": ["*"]
+  },
+  "balance": {
+    "method": "GET",
+    "probePaths": [
+      "/v1/dashboard/billing/credit_grants",
+      "/v1/usage",
+      "/usage",
+      "/balance",
+      "/credits",
+      "/user/balance",
+      "/api/v1/credits"
+    ],
+    "auth": "bearer",
+    "headers": {
+      "Accept": "application/json"
+    },
+    "fields": {
+      "currency": ["currency", "data.currency", "result.currency"],
+      "available": [
+        "total_available",
+        "totalAvailable",
+        "available_balance",
+        "availableBalance",
+        "balance",
+        "remaining",
+        "remaining_balance",
+        "remainingBalance",
+        "total_balance",
+        "totalBalance",
+        "quota_remaining",
+        "quotaRemaining",
+        "remain_quota",
+        "remainQuota",
+        "credits",
+        "credit",
+        "amount"
+      ],
+      "toppedUp": ["topped_up_balance", "toppedUpBalance"],
+      "granted": ["granted_balance", "grantedBalance"]
+    }
+  },
+  "webUsage": {
+    "id": "generic-web",
+    "urlTemplate": "{{baseUrl}}/usage",
+    "auth": {
+      "type": "browserBearer",
+      "origin": "{{websiteOrigin}}",
+      "storageKeys": ["token", "access_token", "userToken", "auth_token"]
+    },
+    "headers": {
+      "Accept": "application/json"
+    },
+    "costPaths": [
+      "cost",
+      "total_cost",
+      "totalCost",
+      "usage",
+      "total_usage",
+      "data.cost",
+      "data.total_cost",
+      "data.totalCost",
+      "data.usage",
+      "data.total_usage"
+    ],
+    "currencyPaths": [
+      "currency",
+      "data.currency"
+    ]
+  }
+}

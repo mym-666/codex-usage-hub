@@ -1,0 +1,27 @@
+# Atomic-write leftovers (should never be committed; see fs-atomic.mjs)
+*.tmp
+
+# Node
+node_modules/
+npm-debug.log*
+
+# OS noise
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Editor / IDE state
+.vscode/
+.idea/
+.vs/
+
+# Local packaging output
+dist/
+share/
+*.zip
+
+# Internal working notes: these describe one developer's machine, local
+# balances and private review evidence, so they stay out of the public repo.
+交接文档.md
+安全评审报告.md
+docs/internal/

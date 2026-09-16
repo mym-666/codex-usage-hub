@@ -1,0 +1,62 @@
+{
+  "id": "deepseek",
+  "displayName": "DeepSeek",
+  "match": {
+    "names": ["deepseek"],
+    "hosts": ["api.deepseek.com"],
+    "websiteHosts": ["platform.deepseek.com"],
+    "categories": ["cn_official"]
+  },
+  "pricing": {
+    "currency": "USD",
+    "models": [
+      { "match": ["deepseek-v4-flash"], "displayName": "DeepSeek V4 Flash", "inputPerMillion": 0.3, "outputPerMillion": 1.2, "cacheReadPerMillion": 0.006, "cacheCreationPerMillion": 0 },
+      { "match": ["deepseek-v4-pro"], "displayName": "DeepSeek V4 Pro", "inputPerMillion": 0.3, "outputPerMillion": 1.2, "cacheReadPerMillion": 0.006, "cacheCreationPerMillion": 0 },
+      { "match": ["deepseek-flash"], "displayName": "DeepSeek V4.1 Flash", "inputPerMillion": 0.3, "outputPerMillion": 1.2, "cacheReadPerMillion": 0.006, "cacheCreationPerMillion": 0 },
+      { "match": ["deepseek-chat"], "displayName": "DeepSeek Chat", "inputPerMillion": 0.44, "outputPerMillion": 1.32, "cacheReadPerMillion": 0.014, "cacheCreationPerMillion": 0 },
+      { "match": ["deepseek-reasoner"], "displayName": "DeepSeek Reasoner", "inputPerMillion": 0.44, "outputPerMillion": 1.32, "cacheReadPerMillion": 0.014, "cacheCreationPerMillion": 0 },
+      { "match": ["deepseek-v3.2"], "displayName": "DeepSeek V3.2", "inputPerMillion": 0.28, "outputPerMillion": 0.42, "cacheReadPerMillion": 0.028, "cacheCreationPerMillion": 0 },
+      { "match": ["deepseek-v3.1"], "displayName": "DeepSeek V3.1", "inputPerMillion": 0.55, "outputPerMillion": 1.67, "cacheReadPerMillion": 0.055, "cacheCreationPerMillion": 0 },
+      { "match": ["deepseek-v3"], "displayName": "DeepSeek V3", "inputPerMillion": 0.28, "outputPerMillion": 1.11, "cacheReadPerMillion": 0.028, "cacheCreationPerMillion": 0 }
+    ]
+  },
+  "balance": {
+    "method": "GET",
+    "url": "https://api.deepseek.com/user/balance",
+    "auth": "bearer",
+    "headers": {
+      "Accept": "application/json"
+    },
+    "fields": {
+      "currency": "balance_infos.*.currency",
+      "available": "balance_infos.*.total_balance",
+      "toppedUp": "balance_infos.*.topped_up_balance",
+      "granted": "balance_infos.*.granted_balance"
+    }
+  },
+  "webUsage": {
+    "id": "deepseek-web",
+    "urlTemplate": "https://platform.deepseek.com/api/v0/usage/by_api_key/cost?start={{startUnix}}&end={{endUnix}}&tz={{tzOffset}}",
+    "auth": {
+      "type": "browserBearer",
+      "origin": "https://platform.deepseek.com",
+      "storageKeys": ["userToken"]
+    },
+    "headers": {
+      "Accept": "application/json",
+      "Referer": "https://platform.deepseek.com/usage",
+      "Origin": "https://platform.deepseek.com",
+      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36"
+    },
+    "costPaths": [
+      "data.biz_data.data.*.series.*.buckets.*.cost"
+    ],
+    "currencyPaths": [
+      "data.biz_data.data.*.currency"
+    ],
+    "errorPaths": [
+      "data.biz_code",
+      "code"
+    ]
+  }
+}

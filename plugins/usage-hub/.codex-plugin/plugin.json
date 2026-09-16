@@ -1,0 +1,49 @@
+{
+  "name": "usage-hub",
+  "version": "2.4.1",
+  "description": "Displays provider balance, local Codex token usage, session cost, and DeepSeek web bill data in a managed Windows overlay.",
+  "author": {
+    "name": "Andy Miao",
+    "email": "1561713602@qq.com",
+    "url": "https://github.com/mym-666"
+  },
+  "homepage": "https://github.com/mym-666/codex-usage-hub#readme",
+  "repository": "https://github.com/mym-666/codex-usage-hub",
+  "license": "GPL-3.0-only",
+  "keywords": [
+    "usage",
+    "tokens",
+    "balance",
+    "deepseek",
+    "codex",
+    "overlay",
+    "windows"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Usage Hub",
+    "shortDescription": "Balance and token usage in a Codex-managed overlay",
+    "longDescription": "Usage Hub starts a managed Windows overlay with your provider balance, local Codex token usage, current-session cost, and optional exact DeepSeek web bill data. The plugin provides MCP tools, runtime status, overlay controls, and manual Edge extension setup guidance.",
+    "developerName": "Andy Miao",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive",
+      "Read"
+    ],
+    "websiteURL": "https://github.com/mym-666/codex-usage-hub",
+    "privacyPolicyURL": "https://github.com/mym-666/codex-usage-hub/blob/main/PRIVACY.md",
+    "termsOfServiceURL": "https://github.com/mym-666/codex-usage-hub/blob/main/LICENSE",
+    "composerIcon": "./assets/icon.png",
+    "logo": "./assets/logo.png",
+    "screenshots": [
+      "./assets/overlay.png"
+    ],
+    "defaultPrompt": [
+      "Show my current Codex usage and balance.",
+      "Check why the Usage Hub overlay is not updating.",
+      "Help me install the Usage Hub browser bridge."
+    ],
+    "brandColor": "#2563EB"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "usage-hub-local",
+  "interface": {
+    "displayName": "Usage Hub Local"
+  },
+  "plugins": [
+    {
+      "name": "usage-hub",
+      "source": {
+        "source": "local",
+        "path": "./plugins/usage-hub"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

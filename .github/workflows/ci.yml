@@ -1,0 +1,56 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Tests (Windows, Node ${{ matrix.node }})
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: ["22", "24"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Run unit tests
+        shell: pwsh
+        run: ./plugins/usage-hub/tests/run-tests.ps1
+
+      - name: Syntax check JavaScript
+        shell: pwsh
+        run: |
+          $failed = @()
+          foreach ($file in Get-ChildItem -Recurse -File -Path plugins/usage-hub -Include *.js, *.mjs) {
+            node --check $file.FullName
+            if ($LASTEXITCODE -ne 0) { $failed += $file.FullName }
+          }
+          if ($failed.Count -gt 0) { throw "node --check failed: $($failed -join ', ')" }
+
+      - name: Parse PowerShell with Windows PowerShell 5.1
+        shell: powershell
+        run: |
+          $failed = @()
+          foreach ($file in Get-ChildItem -Recurse -File -Filter *.ps1) {
+            $errors = $null
+            $tokens = $null
+            [void][System.Management.Automation.Language.Parser]::ParseFile($file.FullName, [ref]$tokens, [ref]$errors)
+            if ($errors.Count -gt 0) { $failed += "$($file.FullName): $($errors[0].Message)" }
+          }
+          if ($failed.Count -gt 0) { throw ($failed -join [Environment]::NewLine) }
+
+      - name: Validate manifests
+        shell: powershell
+        run: ./tools/validate-manifests.ps1

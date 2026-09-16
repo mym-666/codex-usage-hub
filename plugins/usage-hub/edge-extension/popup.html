@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { width: 300px; margin: 0; padding: 14px; font: 13px/1.5 system-ui, sans-serif; background: #1c1f24; color: #fff; }
+    h1 { margin: 0 0 8px; font-size: 15px; color: #aae1ff; }
+    #status { min-height: 40px; color: #d7dbe0; white-space: pre-line; }
+    button { width: 100%; margin-top: 10px; padding: 7px; border: 0; border-radius: 7px; background: #2e74b5; color: white; cursor: pointer; }
+    small { color: #9aa3ad; }
+    .note { margin-top: 10px; padding: 8px; border-radius: 7px; background: #262b31; color: #b9c1ca; font-size: 11px; line-height: 1.45; }
+    .warn { color: #ffc46b; }
+  </style>
+</head>
+<body>
+  <h1>Usage Hub Web Bill</h1>
+  <div id="status">读取状态…</div>
+  <button id="refresh">立即同步</button>
+  <small>接收器：127.0.0.1:32146</small>
+  <div class="note">
+    保持 Edge 后台运行。完全退出 Edge 后，官网精确消费和 Token 明细会暂停更新；重新打开 Edge 后会自动恢复。<br>
+    点击悬浮窗 <strong>↻</strong> 会立即通知本扩展刷新，通常数秒内生效，无需进入官网或手动点击本扩展。
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+{
+  "name": "codex-usage-hub",
+  "version": "2.4.1",
+  "private": true,
+  "description": "Windows Codex plugin that shows provider balance, Codex token usage and an optional exact DeepSeek web bill in a managed overlay.",
+  "author": {
+    "name": "Andy Miao",
+    "email": "1561713602@qq.com",
+    "url": "https://github.com/mym-666"
+  },
+  "license": "GPL-3.0-only",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mym-666/codex-usage-hub.git"
+  },
+  "homepage": "https://github.com/mym-666/codex-usage-hub#readme",
+  "bugs": {
+    "url": "https://github.com/mym-666/codex-usage-hub/issues"
+  },
+  "keywords": [
+    "codex",
+    "codex-plugin",
+    "usage",
+    "tokens",
+    "balance",
+    "deepseek",
+    "overlay",
+    "windows"
+  ],
+  "scripts": {
+    "test": "powershell -NoProfile -ExecutionPolicy Bypass -File plugins/usage-hub/tests/run-tests.ps1",
+    "check:js": "node --check plugins/usage-hub/mcp/server.mjs"
+  }
+}

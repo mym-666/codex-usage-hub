@@ -1,0 +1,69 @@
+name: Bug report
+description: Something in the overlay, the helper, the MCP tools or the Edge extension is not working
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the report. Please do **not** paste API keys, tokens, cookies or full log
+        files - redact anything that looks like a credential.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What did you expect, and what happened instead?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Start a new Codex thread
+        2. Open the overlay
+        3. ...
+    validations:
+      required: true
+  - type: textarea
+    id: status
+    attributes:
+      label: usage_runtime_status output
+      description: Ask Codex to run the `usage_runtime_status` MCP tool and paste the JSON (redacted)
+      render: json
+  - type: textarea
+    id: snapshot
+    attributes:
+      label: usage_snapshot output (optional)
+      description: Relevant fields only - balance, today, session and the warnings array
+      render: json
+  - type: input
+    id: plugin-version
+    attributes:
+      label: Plugin version
+      description: From `usage_runtime_status` or `codex plugin list`
+      placeholder: 2.4.1
+    validations:
+      required: true
+  - type: input
+    id: extension-version
+    attributes:
+      label: Edge extension version
+      description: Shown on the card in `edge://extensions`, or "not installed"
+      placeholder: 1.7.1
+  - type: input
+    id: windows
+    attributes:
+      label: Windows and Codex version
+      placeholder: Windows 11 24H2, Codex 0.154.0-alpha.6.2
+    validations:
+      required: true
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: I redacted keys, tokens and personal usage numbers
+          required: true
+        - label: I searched existing issues for the same problem
+          required: true

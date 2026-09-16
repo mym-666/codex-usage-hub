@@ -1,0 +1,18 @@
+# Keep the repository content normalized to LF, and force the line endings that
+# Windows tooling actually needs. Without this, a checkout made with
+# core.autocrlf=true rewrites every file and cmd.exe may mis-parse install.cmd.
+* text=auto eol=lf
+
+# cmd.exe resolves labels/goto blocks more reliably with CRLF batch files.
+*.cmd text eol=crlf
+*.bat text eol=crlf
+
+*.ps1 text eol=lf
+*.js  text eol=lf
+*.mjs text eol=lf
+*.json text eol=lf
+*.md  text eol=lf
+
+*.png binary
+*.ico binary
+*.zip binary
