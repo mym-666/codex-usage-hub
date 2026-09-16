@@ -22,10 +22,21 @@ const PLUGIN_ROOT = path.resolve(HERE, "..");
 const MANIFEST = JSON.parse(fs.readFileSync(path.join(PLUGIN_ROOT, ".codex-plugin", "plugin.json"), "utf8"));
 const PLUGIN_VERSION = MANIFEST.version.split("+")[0];
 
+function copyTree(source, destination) {
+  fs.mkdirSync(destination, { recursive: true });
+  for (const entry of fs.readdirSync(source, { withFileTypes: true })) {
+    const from = path.join(source, entry.name);
+    const to = path.join(destination, entry.name);
+    if (entry.isDirectory()) copyTree(from, to);
+    else if (entry.isSymbolicLink()) fs.symlinkSync(fs.readlinkSync(from), to);
+    else fs.copyFileSync(from, to);
+  }
+}
+
 function startHarness(t) {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), "usage-hub-mcp-"));
   const copy = path.join(root, "usage-hub");
-  fs.cpSync(PLUGIN_ROOT, copy, { recursive: true });
+  copyTree(PLUGIN_ROOT, copy);
   // Removing the launcher keeps ensureOverlay() from ever starting a real
   // overlay process; the failure is caught and logged, which is by design.
   fs.rmSync(path.join(copy, "scripts", "start-overlay.ps1"), { force: true });
@@ -41,7 +52,10 @@ function startHarness(t) {
       USAGE_HUB_OVERLAY_WATCHDOG_MS: "600000",
       USAGE_HUB_OWNER_HEARTBEAT_MS: "600000",
       // Private port so a real receiver on 32146 can never be probed.
-      USAGE_HUB_WEB_BILL_PORT: "32199"
+      USAGE_HUB_WEB_BILL_PORT: "32199",
+      // node:sqlite emits an ExperimentalWarning on Node 22. The protocol test
+      // asserts clean stderr, so suppress runtime warnings in this child.
+      NODE_NO_WARNINGS: "1"
     },
     stdio: ["pipe", "pipe", "pipe"],
     windowsHide: true

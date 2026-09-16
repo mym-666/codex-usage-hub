@@ -18,6 +18,14 @@ All notable changes to this project are documented here. The format follows
 - License changed from MIT to GPL-3.0-only before the public release.
 - Repository, homepage, issue and security links now point at the public GitHub project.
 
+### Fixed
+
+- Tests: replaced `fs.cpSync` in the MCP smoke test with a small recursive copy helper.
+  Node 22.23.x can crash natively on Windows when `cpSync` copies this plugin tree, which made
+  the Node 22 CI job fail even though the plugin itself was healthy. The MCP child now also
+  suppresses Node 22's known `node:sqlite` ExperimentalWarning so the protocol test checks
+  protocol output instead of runtime warning noise.
+
 ## [2.4.1] - 2026-09-13
 
 ### Fixed
